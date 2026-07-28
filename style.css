@@ -13,6 +13,7 @@ h1 { margin-bottom: 0; font-family: Georgia, serif; font-size: clamp(2rem, 5vw, 
 .eyebrow { margin-bottom: .25rem; font-size: .7rem; font-weight: 800; letter-spacing: .18em; opacity: .75; }
 .header-actions, .dialog-actions, .data-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
 .user-email { align-self: center; font-size: .85rem; opacity: .85; }
+.version-label { font-size: .8rem; font-weight: 600; opacity: .7; vertical-align: middle; }
 .auth-dialog { max-width: 28rem; }
 .auth-dialog::backdrop { background: rgba(8, 22, 20, .78); }
 .auth-dialog form { display: grid; gap: 1rem; }
