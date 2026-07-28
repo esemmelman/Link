@@ -1,4 +1,4 @@
-# Link Deck v0.2.0
+# Link v0.3.0
 
 An installable, offline-friendly link dashboard built with plain HTML, CSS, and JavaScript.
 

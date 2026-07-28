@@ -1,6 +1,6 @@
 {
-  "name": "Link Deck",
-  "short_name": "Link Deck",
+  "name": "Link",
+  "short_name": "Link",
   "description": "A private dashboard for organizing and opening useful links.",
   "id": "./",
   "start_url": "./",
