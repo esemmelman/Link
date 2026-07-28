@@ -65,7 +65,7 @@ function createCard(link) {
   const fav = card.querySelector('.favorite-button'); fav.textContent = link.favorite ? '★' : '☆'; fav.classList.toggle('active', link.favorite);
   fav.setAttribute('aria-label', link.favorite ? `Remove ${link.title} from favorites` : `Add ${link.title} to favorites`);
   fav.onclick = async () => { const old = link.favorite; link.favorite = !old; render(); const { error } = await db.from(TABLE_NAME).update({favorite:link.favorite,updated_at:new Date().toISOString()}).eq('id',link.id); if(error){link.favorite=old;render();alert(error.message);} };
-  const anchor = card.querySelector('.card-link'); anchor.href = link.url; anchor.querySelector('h2').textContent = link.title; anchor.querySelector('p').textContent = link.description || 'Open this link';
+  const anchor = card.querySelector('.card-link'); anchor.href = link.url; anchor.querySelector('h2').textContent = link.title; anchor.querySelector('p').textContent = link.description || '';
   card.querySelector('.domain').textContent = new URL(link.url).hostname.replace(/^www\./,'');
   card.querySelector('.edit-button').onclick = () => openEditor(link); card.querySelector('.delete-button').onclick = () => deleteLink(link); return card;
 }

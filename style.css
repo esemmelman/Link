@@ -36,6 +36,7 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 1.5rem auto 4rem; }
 .card-link { min-width: 0; padding: .1rem 0; color: inherit; text-decoration: none; }
 .card-link h2 { overflow: hidden; margin-bottom: .05rem; font-family: Georgia, serif; font-size: 1rem; line-height: 1.15; text-overflow: ellipsis; white-space: nowrap; }
 .card-link p { overflow: hidden; margin-bottom: 0; color: #60736e; font-size: .78rem; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.card-link p:empty { display: none; }
 .domain { overflow: hidden; color: #397065; font-size: .82rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .card-actions { display: flex; justify-content: flex-end; align-items: center; gap: .35rem; }
 .card-actions button { padding: .32rem .55rem; font-size: .78rem; }

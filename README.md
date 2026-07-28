@@ -1,4 +1,4 @@
-# Link v0.4.3
+# Link v0.4.4
 
 An installable, offline-friendly link dashboard built with plain HTML, CSS, and JavaScript.
 
