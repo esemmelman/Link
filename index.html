@@ -17,6 +17,8 @@
       <h1>Link Deck</h1>
     </div>
     <div class="header-actions">
+      <span id="userEmail" class="user-email" hidden></span>
+      <button id="signOutButton" class="secondary" type="button" hidden>Sign out</button>
       <button id="installButton" class="secondary" type="button" hidden>Install app</button>
     </div>
   </header>
@@ -37,7 +39,7 @@
 
     <section class="summary" aria-live="polite">
       <p id="resultCount"></p>
-      <p class="storage-note">Saved on this device</p>
+      <p class="storage-note">Securely synced with Supabase</p>
     </section>
 
     <section id="linkGrid" class="link-grid" aria-label="Saved links"></section>
@@ -47,6 +49,17 @@
       <button id="emptyAddButton" type="button">Add a link</button>
     </section>
   </main>
+
+  <dialog id="authDialog" class="auth-dialog">
+    <form id="authForm">
+      <p class="eyebrow">PRIVATE ACCESS</p><h2>Sign in to Link Deck</h2>
+      <p>Your links are protected by your Supabase account.</p>
+      <label>Email <input id="authEmail" type="email" autocomplete="email" required></label>
+      <label>Password <input id="authPassword" type="password" autocomplete="current-password" minlength="6" required></label>
+      <p id="authMessage" class="form-message" role="alert"></p>
+      <div class="dialog-actions"><button id="signUpButton" class="secondary" type="button">Create account</button><button id="signInButton" type="submit">Sign in</button></div>
+    </form>
+  </dialog>
 
   <dialog id="linkDialog">
     <form id="linkForm">
@@ -89,6 +102,8 @@
     </article>
   </template>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
