@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173f3a">
+  <meta name="description" content="A private, installable dashboard for organizing useful links.">
+  <title>Link Deck</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">YOUR SHORTCUTS</p>
+      <h1>Link Deck</h1>
+    </div>
+    <div class="header-actions">
+      <button id="installButton" class="secondary" type="button" hidden>Install app</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="Find and filter links">
+      <button id="addButton" class="toolbar-add" type="button">+ Add link</button>
+      <label class="search-field">
+        <span class="sr-only">Search links</span>
+        <input id="searchInput" type="search" placeholder="Search links…" autocomplete="off">
+      </label>
+      <select id="categoryFilter" aria-label="Filter by category">
+        <option value="all">All categories</option>
+      </select>
+      <label class="favorite-filter"><input id="favoritesOnly" type="checkbox"> Favorites</label>
+      <button id="dataButton" class="secondary" type="button">Backup</button>
+    </section>
+
+    <section class="summary" aria-live="polite">
+      <p id="resultCount"></p>
+      <p class="storage-note">Saved on this device</p>
+    </section>
+
+    <section id="linkGrid" class="link-grid" aria-label="Saved links"></section>
+    <section id="emptyState" class="empty-state" hidden>
+      <h2>No links found</h2>
+      <p id="emptyMessage">Add your first destination to get started.</p>
+      <button id="emptyAddButton" type="button">Add a link</button>
+    </section>
+  </main>
+
+  <dialog id="linkDialog">
+    <form id="linkForm">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">LINK DETAILS</p><h2 id="dialogTitle">Add link</h2></div>
+        <button id="closeDialogButton" class="icon-button" type="button" aria-label="Close">×</button>
+      </div>
+      <input id="linkId" type="hidden">
+      <label>Title <input id="linkTitle" maxlength="80" required autocomplete="off"></label>
+      <label>URL <input id="linkUrl" type="url" inputmode="url" placeholder="https://example.com" required autocomplete="url"></label>
+      <label>Category <input id="linkCategory" maxlength="40" placeholder="Work, Personal, Research…" list="categorySuggestions" autocomplete="off"></label>
+      <datalist id="categorySuggestions"></datalist>
+      <label>Description <textarea id="linkDescription" maxlength="240" rows="3"></textarea></label>
+      <label class="checkbox-row"><input id="linkFavorite" type="checkbox"> Mark as favorite</label>
+      <p id="formMessage" class="form-message" role="alert"></p>
+      <div class="dialog-actions"><button id="cancelButton" class="secondary" type="button">Cancel</button><button type="submit">Save link</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dataDialog">
+    <div class="dialog-heading">
+      <div><p class="eyebrow">YOUR DATA</p><h2>Backup and restore</h2></div>
+      <button id="closeDataButton" class="icon-button" type="button" aria-label="Close">×</button>
+    </div>
+    <p>Download a JSON backup or restore links from a previous Link Deck backup.</p>
+    <div class="data-actions">
+      <button id="exportButton" type="button">Download backup</button>
+      <label class="file-button secondary">Restore backup<input id="importInput" type="file" accept="application/json,.json"></label>
+    </div>
+    <p id="dataMessage" class="form-message" role="status"></p>
+  </dialog>
+
+  <template id="linkCardTemplate">
+    <article class="link-item">
+      <button class="favorite-button icon-button" type="button" aria-label="Toggle favorite">☆</button>
+      <a class="card-link" target="_blank" rel="noopener noreferrer"><h2></h2><p></p></a>
+      <span class="category-badge"></span>
+      <span class="domain"></span>
+      <div class="card-actions"><button class="edit-button secondary" type="button">Edit</button><button class="delete-button danger" type="button">Delete</button></div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
