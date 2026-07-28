@@ -103,4 +103,19 @@ elements.importInput.onchange=async()=>{try{if(elements.importInput.files[0])awa
 [elements.searchInput,elements.categoryFilter,elements.favoritesOnly].forEach(x=>x.addEventListener('input',render));
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;elements.installButton.hidden=false;}); elements.installButton.onclick=async()=>{if(installPrompt)await installPrompt.prompt();installPrompt=null;elements.installButton.hidden=true;};
 db.auth.onAuthStateChange((event,session)=>setTimeout(()=>{if(session&&(!currentUser||currentUser.id!==session.user.id))startSession(session);else if(!session)showAuth();},0));
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js')); render();
+if ('serviceWorker' in navigator) {
+  let reloadingForUpdate = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloadingForUpdate) return;
+    reloadingForUpdate = true;
+    window.location.reload();
+  });
+  window.addEventListener('load', async () => {
+    const registration = await navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });
+    registration.update();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') registration.update();
+    });
+  });
+}
+render();
