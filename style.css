@@ -61,9 +61,10 @@ dialog .checkbox-row { display: flex; align-items: center; }
   .mobile-backup { display: inline-block; }
   main { width: min(100% - 1rem, 1120px); margin-top: .75rem; }
   .toolbar { grid-template-columns: auto 1fr; gap: .55rem; padding: .7rem; }
-  .toolbar-add { padding: .52rem .7rem; font-size: .82rem; }
-  .favorite-filter { justify-self: start; }
-  .search-field, .toolbar select { grid-column: 1 / -1; }
+  .toolbar-add { grid-column: 1; grid-row: 1; padding: .7rem 1rem; font-size: 1rem; }
+  .favorite-filter { grid-column: 2; grid-row: 1; justify-self: end; }
+  .toolbar select { grid-column: 1 / -1; grid-row: 2; }
+  .search-field { grid-column: 1 / -1; grid-row: 3; }
   #dataButton { display: none; }
-  .storage-note { display: none; }
+  .summary { display: none; }
 }
