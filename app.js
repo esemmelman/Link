@@ -6,7 +6,7 @@ const elements = Object.fromEntries([
   'addButton','emptyAddButton','searchInput','categoryFilter','favoritesOnly','dataButton','linkGrid','emptyState','emptyMessage','resultCount',
   'linkDialog','linkForm','dialogTitle','linkId','linkTitle','linkUrl','linkCategory','linkDescription','linkFavorite','categorySuggestions','formMessage','closeDialogButton','cancelButton',
   'dataDialog','closeDataButton','exportButton','importInput','dataMessage','linkCardTemplate','installButton',
-  'authDialog','authForm','authEmail','authPassword','authMessage','signUpButton','signInButton','signOutButton','userEmail'
+  'authDialog','authForm','authEmail','authPassword','authMessage','signUpButton','signInButton','signOutButton','userEmail','mobileDataButton'
 ].map(id => [id, document.getElementById(id)]));
 let links = [], currentUser = null, installPrompt = null;
 
@@ -97,7 +97,8 @@ elements.authForm.onsubmit=async e=>{e.preventDefault();elements.authMessage.tex
 elements.signUpButton.onclick=async()=>{if(!elements.authForm.reportValidity())return;elements.authMessage.textContent='';elements.signUpButton.disabled=true;const{data,error}=await db.auth.signUp({email:elements.authEmail.value.trim(),password:elements.authPassword.value});elements.signUpButton.disabled=false;if(error)elements.authMessage.textContent=error.message;else if(!data.session)elements.authMessage.textContent='Check your email to confirm your account, then sign in.';};
 elements.signOutButton.onclick=()=>db.auth.signOut(); elements.addButton.onclick=elements.emptyAddButton.onclick=()=>openEditor();
 elements.authDialog.addEventListener('cancel', event => event.preventDefault());
-elements.cancelButton.onclick=elements.closeDialogButton.onclick=()=>elements.linkDialog.close(); elements.dataButton.onclick=()=>{elements.dataMessage.textContent='';elements.dataDialog.showModal();}; elements.closeDataButton.onclick=()=>elements.dataDialog.close(); elements.exportButton.onclick=exportLinks;
+elements.cancelButton.onclick=elements.closeDialogButton.onclick=()=>elements.linkDialog.close();
+elements.dataButton.onclick=elements.mobileDataButton.onclick=()=>{elements.dataMessage.textContent='';elements.dataDialog.showModal();}; elements.closeDataButton.onclick=()=>elements.dataDialog.close(); elements.exportButton.onclick=exportLinks;
 elements.importInput.onchange=async()=>{try{if(elements.importInput.files[0])await importLinks(elements.importInput.files[0]);}catch(error){elements.dataMessage.textContent=error.message;}finally{elements.importInput.value='';}};
 [elements.searchInput,elements.categoryFilter,elements.favoritesOnly].forEach(x=>x.addEventListener('input',render));
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;elements.installButton.hidden=false;}); elements.installButton.onclick=async()=>{if(installPrompt)await installPrompt.prompt();installPrompt=null;elements.installButton.hidden=true;};
